@@ -57,8 +57,8 @@ public class Parabola : SecondOrderCurve
     public Parabola(double a, double b, double c, double d, double e, double f) 
         : base(a, b, c, d, e, f)
     {
-        // Проверка на условие параболы: B² - 4AC = 0
-        if (B*B - 4*A*C != 0)
+        // Проверка на условие параболы: B² - 4AC = 0 и хотя бы один из A или C не равен 0
+        if (B*B - 4*A*C != 0 || (A == 0 && C == 0))
         {
             throw new ArgumentException("Уравнение не соответствует параболе");
         }
@@ -178,6 +178,9 @@ public class Program
             // Создаем гиперболу: x² - y² - 2x + 4y - 4 = 0
             var hyperbola = new Hyperbola(1, 0, -1, -2, 4, -4);
             hyperbola.PrintData();
+            
+            // Попытка создать неверную параболу (должна вызвать исключение) 
+            // var invalidParabola = new Parabola(0, 0, 0, 1, 2, 3);
         }
         catch (ArgumentException ex)
         {
